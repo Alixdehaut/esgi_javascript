@@ -31,7 +31,7 @@ function camelCase(string) {
         return '';
     }
     let str = capitalize(string);
-    let regex = / /gi;
+    let regex = /[^a-zA-Z0-9]/g;
     return str.replace(regex, '');
 }
 
@@ -39,16 +39,15 @@ function snake_case(string) {
     if (typeof string!= "string") {
         return '';
     }
-    let str = string.trim().toLowerCase();
-    if (string.split(' ').length > 1){
-        let regex = / /gi;
-        return str.replace(regex, '_');
-    }
-    return str;
+    let regex = /[^a-z0-9]/g;
+    return string.trim().toLowerCase().replace(regex, '_');
 }
 
 function leet(string) {
-   let cryptage = {'A': 4, 'E': 3, 'I': 1, 'O': 0 ,'U' :'_', 'Y':7};
+    if (typeof string!= "string") {
+        return '';
+    }
+   const vowel = {'a': 4, 'e': 3, 'i': 1, 'o': 0 ,'u' :'_', 'y':7};
     for (let i = 0; i < string.length; i++){
         switch (string[i]) {
             case /a/i:
@@ -75,7 +74,7 @@ function leet(string) {
 }
 
 console.log(ucfirst('hello world'));
-console.log(capitalize('hello world'));
-console.log(camelCase('et coucou les copAins ! '));
-console.log(snake_case('Niec Vroum'));
+console.log(capitalize('hello WORLD'));
+console.log(camelCase('et coucou_les copAins ! '));
+console.log(snake_case('Niec Vroum_toTo'));
 console.log(leet('ANACONDA'));
