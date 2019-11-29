@@ -73,8 +73,32 @@ function leet(string) {
     return string;
 }
 
-console.log(ucfirst('hello world'));
-console.log(capitalize('hello WORLD'));
-console.log(camelCase('et coucou_les copAins ! '));
-console.log(snake_case('Niec Vroum_toTo'));
-console.log(leet('ANACONDA'));
+let prairie = {
+    animal : {
+        type :{
+            name: "chien"
+        },
+        gender: "not exist"
+    }
+};
+
+function prop_access(object, path){
+    if(path === null || path.length < 0) return object;
+    let segments = path.split('.');
+    let cursor = object;
+    let segment;
+    let i;
+    for (i= 0; i < segments.length-1; ++i){
+        segment = segments[i];
+        cursor = cursor[segment];
+    }
+    let value =  cursor[segments[i]];
+    return (value === undefined ? object.animal.gender : value)
+}
+
+// console.log(ucfirst('hello world'));
+// console.log(capitalize('hello WORLD'));
+// console.log(camelCase('et coucou_les+ copAins ! '));
+// console.log(snake_case('Niec Vroum_toTo'));
+// console.log(leet('ANACONDA'));
+console.log(prop_access(prairie, 'animal.type.name'));
